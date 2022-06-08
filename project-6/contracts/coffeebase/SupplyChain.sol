@@ -29,7 +29,7 @@ contract SupplyChain {
     Shipped,    // 5
     Received,   // 6
     Purchased   // 7
-    }
+   }
 
   State constant defaultState = State.Harvested;
 
@@ -155,7 +155,7 @@ contract SupplyChain {
   // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
   function harvestItem(uint _upc, address _originFarmerID, string _originFarmName, string _originFarmInformation, string  _originFarmLatitude, string  _originFarmLongitude, string  _productNotes) public 
   {
-    Item memory item = Item({sku: sku, upc: _upc, ownerID: _originFarmerID, originFarmerID: _originFarmerID, originFarmName: _originFarmName, originFarmInformation: _originFarmInformation, originFarmLatitude: _originFarmLatitude, originFarmLongitude: _originFarmLongitude, productID: sku + _upc, productNotes: _productNotes, productPrice: 0, itemState: State.Harvested, distributorID: address(0), retailerID: address(0), consumerID: address(0)});
+    Item memory item = Item({sku: sku, upc: _upc, ownerID: msg.sender, originFarmerID: _originFarmerID, originFarmName: _originFarmName, originFarmInformation: _originFarmInformation, originFarmLatitude: _originFarmLatitude, originFarmLongitude: _originFarmLongitude, productID: sku + _upc, productNotes: _productNotes, productPrice: 0, itemState: State.Harvested, distributorID: address(0), retailerID: address(0), consumerID: address(0)});
 
     // Add the new item as part of Harvest
     items[_upc] = item;
@@ -167,16 +167,20 @@ contract SupplyChain {
   }
 
   // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
-  function processItem(uint _upc) public 
-  // Call modifier to check if upc has passed previous supply chain stage
-  
-  // Call modifier to verify caller of this function
-  
+  function processItem(uint _upc) public
+    // Call modifier to check if upc has passed previous supply chain stage
+    harvested(_upc)
+    // Call modifier to verify caller of this function
+    verifyCaller(items[_upc].ownerID)
   {
+
+    Item memory item = items[_upc];
+
     // Update the appropriate fields
-    
+    items[_upc].itemState = State.Processed;
     // Emit the appropriate event
-    
+    emit Processed(_upc);
+
   }
 
   // Define a function 'packItem' that allows a farmer to mark an item 'Packed'
@@ -317,8 +321,17 @@ contract SupplyChain {
   ) 
   {
     // Assign values to the 9 parameters
-  
-    
+    Item memory item = items[_upc];
+    itemSKU = item.sku;
+    itemUPC = item.upc;
+    productID = item.productID;
+    productNotes = item.productNotes;
+    productPrice = item.productPrice;
+    itemState = uint(item.itemState);
+    distributorID = item.distributorID;
+    retailerID = item.retailerID;
+    consumerID = item.consumerID;
+
   return 
   (
   itemSKU,
