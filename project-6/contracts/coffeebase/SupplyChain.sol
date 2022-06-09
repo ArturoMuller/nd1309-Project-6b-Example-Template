@@ -120,19 +120,19 @@ contract SupplyChain {
   
   // Define a modifier that checks if an item.state of a upc is Shipped
   modifier shipped(uint _upc) {
-
+    require(items[_upc].itemState == State.Shipped);
     _;
   }
 
   // Define a modifier that checks if an item.state of a upc is Received
   modifier received(uint _upc) {
-
+    require(items[_upc].itemState == State.Received);
     _;
   }
 
   // Define a modifier that checks if an item.state of a upc is Purchased
   modifier purchased(uint _upc) {
-    
+    require(items[_upc].itemState == State.Purchased);
     _;
   }
 
@@ -222,13 +222,12 @@ contract SupplyChain {
     // Call modifer to send any excess ether back to buyer
     checkValue(_upc)
     {
-      Item memory item = items[_upc];
+      // Transfer money to farmer
+      items[_upc].originFarmerID.transfer(msg.value);
       // Update the appropriate fields - ownerID, distributorID, itemState
       items[_upc].itemState = State.Sold;
       items[_upc].ownerID = msg.sender;
       items[_upc].distributorID = msg.sender;
-      // Transfer money to farmer
-      items[_upc].originFarmerID.transfer(msg.value);
       // emit the appropriate event
       emit Sold(_upc);
     }
@@ -237,14 +236,14 @@ contract SupplyChain {
   // Use the above modifers to check if the item is sold
   function shipItem(uint _upc) public 
     // Call modifier to check if upc has passed previous supply chain stage
-    
+    sold(_upc)
     // Call modifier to verify caller of this function
-    
-    {
+    verifyCaller(items[_upc].ownerID)
+  {
     // Update the appropriate fields
-    
+    items[_upc].itemState = State.Shipped;
     // Emit the appropriate event
-    
+    emit Shipped(_upc);
   }
 
   // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
