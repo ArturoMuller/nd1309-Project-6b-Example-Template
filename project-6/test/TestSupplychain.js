@@ -124,22 +124,24 @@ contract('SupplyChain', function(accounts) {
     // 4th Test
     it("Testing smart contract function sellItem() that allows a farmer to sell coffee", async() => {
         const supplyChain = await SupplyChain.deployed()
-        
+        await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes, {from:  accounts[1]});
+        await supplyChain.processItem(upc, {from:  accounts[1]});
+        await supplyChain.packItem(upc, {from:  accounts[1]});
         // Declare and Initialize a variable for event
-        
-        
+        var eventEmitted = false;
         // Watch the emitted event ForSale()
-        
-
+        var event = supplyChain.ForSale();
+        await event.watch(async (err, res) => {
+            eventEmitted = true;
+        });
         // Mark an item as ForSale by calling function sellItem()
-        
-
+        await supplyChain.sellItem(upc, Math.pow(10, 18),{from:  accounts[1]});
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
-
+        const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
         // Verify the result set
-          
-    })    
+        assert.equal(resultBufferTwo[5].toNumber(), 3, 'Error: Invalid item State');
+        assert.equal(eventEmitted, true, 'Invalid event emitted');
+    });
 
     // 5th Test
     it("Testing smart contract function buyItem() that allows a distributor to buy coffee", async() => {

@@ -102,8 +102,8 @@ contract SupplyChain {
   
   // Define a modifier that checks if an item.state of a upc is Packed
   modifier packed(uint _upc) {
-
-    _;
+    require(items[_upc].itemState == State.Packed);
+  _;
   }
 
   // Define a modifier that checks if an item.state of a upc is ForSale
@@ -200,14 +200,15 @@ contract SupplyChain {
   // Define a function 'sellItem' that allows a farmer to mark an item 'ForSale'
   function sellItem(uint _upc, uint _price) public 
   // Call modifier to check if upc has passed previous supply chain stage
-  
+  packed(_upc)
   // Call modifier to verify caller of this function
-  
+  verifyCaller(items[_upc].ownerID)
   {
+    Item memory item = items[_upc];
     // Update the appropriate fields
-    
+    items[_upc].itemState = State.ForSale;
     // Emit the appropriate event
-    
+    emit ForSale(_upc);
   }
 
   // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
