@@ -85,7 +85,7 @@ contract SupplyChain {
     _;
     uint _price = items[_upc].productPrice;
     uint amountToReturn = msg.value - _price;
-    items[_upc].consumerID.transfer(amountToReturn);
+    msg.sender.transfer(amountToReturn);
   }
 
   // Define a modifier that checks if an item.state of a upc is Harvested
@@ -108,13 +108,13 @@ contract SupplyChain {
 
   // Define a modifier that checks if an item.state of a upc is ForSale
   modifier forSale(uint _upc) {
-
+    require(items[_upc].itemState == State.ForSale);
     _;
   }
 
   // Define a modifier that checks if an item.state of a upc is Sold
   modifier sold(uint _upc) {
-
+    require(items[_upc].itemState == State.Sold);
     _;
   }
   
@@ -204,9 +204,9 @@ contract SupplyChain {
   // Call modifier to verify caller of this function
   verifyCaller(items[_upc].ownerID)
   {
-    Item memory item = items[_upc];
     // Update the appropriate fields
     items[_upc].itemState = State.ForSale;
+    items[_upc].productPrice = _price;
     // Emit the appropriate event
     emit ForSale(_upc);
   }
@@ -216,20 +216,22 @@ contract SupplyChain {
   // and any excess ether sent is refunded back to the buyer
   function buyItem(uint _upc) public payable 
     // Call modifier to check if upc has passed previous supply chain stage
-    
+    forSale(_upc)
     // Call modifer to check if buyer has paid enough
-    
+    paidEnough(msg.value)
     // Call modifer to send any excess ether back to buyer
-    
+    checkValue(_upc)
     {
-    
-    // Update the appropriate fields - ownerID, distributorID, itemState
-    
-    // Transfer money to farmer
-    
-    // emit the appropriate event
-    
-  }
+      Item memory item = items[_upc];
+      // Update the appropriate fields - ownerID, distributorID, itemState
+      items[_upc].itemState = State.Sold;
+      items[_upc].ownerID = msg.sender;
+      items[_upc].distributorID = msg.sender;
+      // Transfer money to farmer
+      items[_upc].originFarmerID.transfer(msg.value);
+      // emit the appropriate event
+      emit Sold(_upc);
+    }
 
   // Define a function 'shipItem' that allows the distributor to mark an item 'Shipped'
   // Use the above modifers to check if the item is sold
