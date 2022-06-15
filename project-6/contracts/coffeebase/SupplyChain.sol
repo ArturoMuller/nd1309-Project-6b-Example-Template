@@ -1,6 +1,13 @@
 pragma solidity ^0.4.24;
+
+import "../coffeeaccesscontrol/ConsumerRole.sol";
+import "../coffeeaccesscontrol/DistributorRole.sol";
+import "../coffeeaccesscontrol/FarmerRole.sol";
+import "../coffeeaccesscontrol/RetailerRole.sol";
 // Define a contract 'Supplychain'
-contract SupplyChain {
+
+
+contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole {
 
   // Define 'owner'
   address owner;
@@ -255,7 +262,7 @@ contract SupplyChain {
     onlyRetailer()
   {
     // Update the appropriate fields - ownerID, retailerID, itemState
-    items[_upc].ownerID = msg.sender;
+    items[_upc].ownerID = msg.sender; // why would the retailer own an item he hasn't yet paid for
     items[_upc].retailerID = msg.sender;
     items[_upc].itemState = State.Received;
     // Emit the appropriate event
