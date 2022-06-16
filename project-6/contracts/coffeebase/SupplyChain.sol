@@ -262,7 +262,7 @@ contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole 
     onlyRetailer()
   {
     // Update the appropriate fields - ownerID, retailerID, itemState
-    items[_upc].ownerID = msg.sender; // why would the retailer own an item he hasn't yet paid for
+    items[_upc].ownerID = msg.sender;
     items[_upc].retailerID = msg.sender;
     items[_upc].itemState = State.Received;
     // Emit the appropriate event
@@ -273,13 +273,16 @@ contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole 
   // Use the above modifiers to check if the item is received
   function purchaseItem(uint _upc) public 
     // Call modifier to check if upc has passed previous supply chain stage
-    
+    received(_upc)
     // Access Control List enforced by calling Smart Contract / DApp
+    onlyConsumer()
     {
-    // Update the appropriate fields - ownerID, consumerID, itemState
-    
-    // Emit the appropriate event
-    
+      // Update the appropriate fields - ownerID, retailerID, itemState
+      items[_upc].ownerID = msg.sender; // why would the retailer own an item he hasn't yet paid for
+      items[_upc].consumerID = msg.sender;
+      items[_upc].itemState = State.Purchased;
+      // Emit the appropriate event
+      emit Purchased(_upc);
   }
 
   // Define a function 'fetchItemBufferOne' that fetches the data
