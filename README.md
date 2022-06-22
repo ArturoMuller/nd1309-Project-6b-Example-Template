@@ -115,10 +115,14 @@ Your project files
 
 ## UML documents:
 
-[Activity](activity.png)
-[Sequence](sequence.png)
-[State](state.png)
-[class](project-6.svg)
+[Activity](./activity.png)
+
+[Sequence](./sequence.png)
+
+[State](./state.png)
+
+[class](./project-6.svg)
+
 
 ## Deploy 
 node  v12.0.0
