@@ -110,3 +110,39 @@ See also the list of [contributors](https://github.com/your/project/contributors
 * Ganache-cli
 * Truffle
 * IPFS
+
+Your project files
+
+## UML documents:
+
+[Activity](activity.png)
+[Sequence](sequence.png)
+[State](state.png)
+[class](project-6.svg)
+
+## Deploy 
+node  v12.0.0
+Truffle v4.1.14 (core: 4.1.14)
+Solidity v0.4.24 (solc-js)
+web3
+
+[etherscan link](https://rinkeby.etherscan.io/address/0x7d84c5ab4443f4b20ba6d6ba3b84f88f3f75a385#code)
+```
+Deploying FarmerRole...
+  ... 0x5dc345135a8da7df82721c71635ca9f1b7e09220334eba43b917d52823af9d11
+  FarmerRole: 0x19abd1b1c1a98f6a02d85d4bf606b2e3e86bcd7c
+  Deploying DistributorRole...
+  ... 0x1ba8612a6b9d8c005e12ea180b86d306971235ca568ac50022dfde4ad67edd13
+  DistributorRole: 0x07ffd501851f84d3c63b4c54b363fb082e22c693
+  Deploying RetailerRole...
+  ... 0x94616a30cd50b5f2a492a2287b494dcd6158eda840653ef1805fa10798657d6c
+  RetailerRole: 0x65c676157f0e29f84bc4dfdc7ea801e83b830987
+  Deploying ConsumerRole...
+  ... 0xd21d67240c69d3ac373716cebf6366c0673a5e32bf5479ec7ed58f20b233e111
+  ConsumerRole: 0xfa2fde8a8a48ae1e89c186ae9676224e038f4287
+  Deploying SupplyChain...
+  ... 0xaa5a95d3e228c15ce6336b6e405d10960e643ff53d2aed32fb2237cdfb108ddd
+  SupplyChain: 0x7d84c5ab4443f4b20ba6d6ba3b84f88f3f75a385
+Saving successful migration to network...
+  ... 0x5a160d38e53ead00551c374c9b331ef6dcbeeab2114e4d0b14b7999737be088f
+```
