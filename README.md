@@ -115,13 +115,13 @@ Your project files
 
 ## UML documents:
 
-[Activity](activity.png)
+[Activity](./activity.png)
 
-[Sequence](sequence.png)
+[Sequence](./sequence.png)
 
-[State](state.png)
+[State](./state.png)
 
-[class](project-6.svg)
+[class](./project-6.svg)
 
 
 ## Deploy 
