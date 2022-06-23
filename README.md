@@ -132,21 +132,21 @@ web3
 
 [etherscan link](https://rinkeby.etherscan.io/address/0x7d84c5ab4443f4b20ba6d6ba3b84f88f3f75a385#code)
 ```
-Deploying FarmerRole...
-  ... 0x5dc345135a8da7df82721c71635ca9f1b7e09220334eba43b917d52823af9d11
-  FarmerRole: 0x19abd1b1c1a98f6a02d85d4bf606b2e3e86bcd7c
-  Deploying DistributorRole...
-  ... 0x1ba8612a6b9d8c005e12ea180b86d306971235ca568ac50022dfde4ad67edd13
-  DistributorRole: 0x07ffd501851f84d3c63b4c54b363fb082e22c693
-  Deploying RetailerRole...
-  ... 0x94616a30cd50b5f2a492a2287b494dcd6158eda840653ef1805fa10798657d6c
-  RetailerRole: 0x65c676157f0e29f84bc4dfdc7ea801e83b830987
-  Deploying ConsumerRole...
-  ... 0xd21d67240c69d3ac373716cebf6366c0673a5e32bf5479ec7ed58f20b233e111
-  ConsumerRole: 0xfa2fde8a8a48ae1e89c186ae9676224e038f4287
-  Deploying SupplyChain...
-  ... 0xaa5a95d3e228c15ce6336b6e405d10960e643ff53d2aed32fb2237cdfb108ddd
-  SupplyChain: 0x7d84c5ab4443f4b20ba6d6ba3b84f88f3f75a385
+ Replacing FarmerRole...
+  ... 0xbaf118631cc20fedbf80aae53499e94c1ebbc42363eb856a99eb53f1c6523f88
+  FarmerRole: 0xf74fbd483c73d9c148ce58232677f98ed54c9649
+  Replacing DistributorRole...
+  ... 0x3eb91909521309b89e1540e9232b2222d8e2b8dde3f69acb9ae2a00cfce2df71
+  DistributorRole: 0x8feb6acb053680a82b57c1991753927b6c8df0a3
+  Replacing RetailerRole...
+  ... 0x7d4cba32b97a1697e9efae28971e618597a6ebdc1c57b80f6e4ca485e42738a4
+  RetailerRole: 0xa3c8b0ec92769f81a8406a294f88e28132a3ff38
+  Replacing ConsumerRole...
+  ... 0xd23b72ce9fe80f44acda8d6d9810448191befa00d1b73322293a4a99c41d3b9a
+  ConsumerRole: 0x0c450b74935dfbeb80a07383c17c956930b0f465
+  Replacing SupplyChain...
+  ... 0x0c2f5e8abb1162a7d652ba29b1a96cb844d100db76499781fbfe22a92fdb3987
+  SupplyChain: 0x9e17fdb56b92dce7e5d5655cc60ef220301ba94b
 Saving successful migration to network...
-  ... 0x5a160d38e53ead00551c374c9b331ef6dcbeeab2114e4d0b14b7999737be088f
+  ... 0xacb181f60419e7121604eeb335d404ccb4cec70ac18db3a527f74ad624cd49b8
 ```
